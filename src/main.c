@@ -1,6 +1,6 @@
-#include "fig_8_37_sigchld.h"
+#include "ex_8_20_myls.h"
 
 int main(int argc, char *argv[]) {
-    main_fig_8_37(argc, argv);
+    main_ex_8_20(argc, argv);
     return 0;
 }
