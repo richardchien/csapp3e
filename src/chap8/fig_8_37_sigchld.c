@@ -4,7 +4,7 @@
 
 #include "fig_8_37_sigchld.h"
 
-#include "csapp.h"
+#include "../csapp.h"
 
 static void handler1(int sig) {
     int olderrno = errno;

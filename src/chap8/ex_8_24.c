@@ -4,7 +4,7 @@
 
 #include "ex_8_24.h"
 
-#include "csapp.h"
+#include "../csapp.h"
 
 #define N 2
 

@@ -4,7 +4,7 @@
 
 #include "ex_8_7_sleep.h"
 
-#include "csapp.h"
+#include "../csapp.h"
 
 static unsigned snooze(unsigned secs) {
     unsigned remained = sleep(secs);
