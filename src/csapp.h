@@ -271,5 +271,7 @@ int Open_listenfd(char *port);
 #define NULL (void *)0
 #endif
 
+#include <glob.h>  // for size_t
+
 #endif /* __CSAPP_H__ */
 /* $end csapp.h */
