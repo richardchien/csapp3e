@@ -7,7 +7,7 @@
 #include "../csapp.h"
 
 void main_ex_9_5(int argc, char *argv[]) {
-    const char *filename = "../README.md";
+    const char *filename = "README.md";
     int fd = open(filename, O_RDONLY);
     struct stat st;
     Fstat(fd, &st);
