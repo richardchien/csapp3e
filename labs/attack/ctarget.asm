@@ -8,7 +8,7 @@ Disassembly of section .init:
   400c48:	48 83 ec 08          	sub    $0x8,%rsp
   400c4c:	e8 6b 02 00 00       	callq  400ebc <call_gmon_start>
   400c51:	48 83 c4 08          	add    $0x8,%rsp
-  400c55:	c3                   	retq   
+  400c55:	c3                   	retq
 
 Disassembly of section .plt:
 
@@ -201,7 +201,7 @@ Disassembly of section .text:
   400ea6:	48 c7 c1 e0 2c 40 00 	mov    $0x402ce0,%rcx
   400ead:	48 c7 c7 ad 11 40 00 	mov    $0x4011ad,%rdi
   400eb4:	e8 87 fe ff ff       	callq  400d40 <__libc_start_main@plt>
-  400eb9:	f4                   	hlt    
+  400eb9:	f4                   	hlt
   400eba:	90                   	nop
   400ebb:	90                   	nop
 
@@ -212,7 +212,7 @@ Disassembly of section .text:
   400eca:	74 02                	je     400ece <call_gmon_start+0x12>
   400ecc:	ff d0                	callq  *%rax
   400ece:	48 83 c4 08          	add    $0x8,%rsp
-  400ed2:	c3                   	retq   
+  400ed2:	c3                   	retq
   400ed3:	90                   	nop
   400ed4:	90                   	nop
   400ed5:	90                   	nop
@@ -235,7 +235,7 @@ Disassembly of section .text:
   400ef0:	48 89 e5             	mov    %rsp,%rbp
   400ef3:	77 02                	ja     400ef7 <deregister_tm_clones+0x17>
   400ef5:	5d                   	pop    %rbp
-  400ef6:	c3                   	retq   
+  400ef6:	c3                   	retq
   400ef7:	b8 00 00 00 00       	mov    $0x0,%eax
   400efc:	48 85 c0             	test   %rax,%rax
   400eff:	74 f4                	je     400ef5 <deregister_tm_clones+0x15>
@@ -256,7 +256,7 @@ Disassembly of section .text:
   400f2d:	48 d1 f8             	sar    %rax
   400f30:	75 02                	jne    400f34 <register_tm_clones+0x24>
   400f32:	5d                   	pop    %rbp
-  400f33:	c3                   	retq   
+  400f33:	c3                   	retq
   400f34:	ba 00 00 00 00       	mov    $0x0,%edx
   400f39:	48 85 d2             	test   %rdx,%rdx
   400f3c:	74 f4                	je     400f32 <register_tm_clones+0x22>
@@ -274,12 +274,12 @@ Disassembly of section .text:
   400f5d:	e8 7e ff ff ff       	callq  400ee0 <deregister_tm_clones>
   400f62:	5d                   	pop    %rbp
   400f63:	c6 05 4e 35 20 00 01 	movb   $0x1,0x20354e(%rip)        # 6044b8 <completed.6976>
-  400f6a:	f3 c3                	repz retq 
+  400f6a:	f3 c3                	repz retq
   400f6c:	0f 1f 40 00          	nopl   0x0(%rax)
 
 0000000000400f70 <frame_dummy>:
   400f70:	48 83 3d 90 2e 20 00 	cmpq   $0x0,0x202e90(%rip)        # 603e08 <__JCR_END__>
-  400f77:	00 
+  400f77:	00
   400f78:	74 1e                	je     400f98 <frame_dummy+0x28>
   400f7a:	b8 00 00 00 00       	mov    $0x0,%eax
   400f7f:	48 85 c0             	test   %rax,%rax
@@ -333,9 +333,9 @@ Disassembly of section .text:
   40102c:	48 81 ec 18 21 00 00 	sub    $0x2118,%rsp
   401033:	89 f5                	mov    %esi,%ebp
   401035:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
-  40103c:	00 00 
+  40103c:	00 00
   40103e:	48 89 84 24 08 21 00 	mov    %rax,0x2108(%rsp)
-  401045:	00 
+  401045:	00
   401046:	31 c0                	xor    %eax,%eax
   401048:	89 3d 8a 34 20 00    	mov    %edi,0x20348a(%rip)        # 6044d8 <check_level>
   40104e:	8b 3d f4 30 20 00    	mov    0x2030f4(%rip),%edi        # 604148 <target_id>
@@ -387,7 +387,7 @@ Disassembly of section .text:
   401115:	83 c3 01             	add    $0x1,%ebx
   401118:	48 63 c3             	movslq %ebx,%rax
   40111b:	48 8b 3c c5 60 41 60 	mov    0x604160(,%rax,8),%rdi
-  401122:	00 
+  401122:	00
   401123:	48 85 ff             	test   %rdi,%rdi
   401126:	75 e1                	jne    401109 <initialize_target+0xdf>
   401128:	b8 00 00 00 00       	mov    $0x0,%eax
@@ -402,12 +402,12 @@ Disassembly of section .text:
   40114a:	bf 08 00 00 00       	mov    $0x8,%edi
   40114f:	e8 ec fc ff ff       	callq  400e40 <exit@plt>
   401154:	48 8d bc 24 00 01 00 	lea    0x100(%rsp),%rdi
-  40115b:	00 
+  40115b:	00
   40115c:	e8 c3 18 00 00       	callq  402a24 <init_driver>
   401161:	85 c0                	test   %eax,%eax
   401163:	79 26                	jns    40118b <initialize_target+0x161>
   401165:	48 8d 94 24 00 01 00 	lea    0x100(%rsp),%rdx
-  40116c:	00 
+  40116c:	00
   40116d:	be e0 2e 40 00       	mov    $0x402ee0,%esi
   401172:	bf 01 00 00 00       	mov    $0x1,%edi
   401177:	b8 00 00 00 00       	mov    $0x0,%eax
@@ -415,15 +415,15 @@ Disassembly of section .text:
   401181:	bf 08 00 00 00       	mov    $0x8,%edi
   401186:	e8 b5 fc ff ff       	callq  400e40 <exit@plt>
   40118b:	48 8b 84 24 08 21 00 	mov    0x2108(%rsp),%rax
-  401192:	00 
+  401192:	00
   401193:	64 48 33 04 25 28 00 	xor    %fs:0x28,%rax
-  40119a:	00 00 
+  40119a:	00 00
   40119c:	74 05                	je     4011a3 <initialize_target+0x179>
   40119e:	e8 3d fb ff ff       	callq  400ce0 <__stack_chk_fail@plt>
   4011a3:	48 81 c4 18 21 00 00 	add    $0x2118,%rsp
   4011aa:	5b                   	pop    %rbx
   4011ab:	5d                   	pop    %rbp
-  4011ac:	c3                   	retq   
+  4011ac:	c3                   	retq
 
 00000000004011ad <main>:
   4011ad:	41 56                	push   %r14
@@ -495,7 +495,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4012c9:	41 89 c5             	mov    %eax,%r13d
   4012cc:	eb 2b                	jmp    4012f9 <main+0x14c>
   4012ce:	c7 05 b0 31 20 00 00 	movl   $0x0,0x2031b0(%rip)        # 604488 <notify>
-  4012d5:	00 00 00 
+  4012d5:	00 00 00
   4012d8:	eb 1f                	jmp    4012f9 <main+0x14c>
   4012da:	0f be d2             	movsbl %dl,%edx
   4012dd:	be cf 2f 40 00       	mov    $0x402fcf,%esi
@@ -538,7 +538,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   40137e:	41 5c                	pop    %r12
   401380:	41 5d                	pop    %r13
   401382:	41 5e                	pop    %r14
-  401384:	c3                   	retq   
+  401384:	c3                   	retq
   401385:	90                   	nop
   401386:	90                   	nop
   401387:	90                   	nop
@@ -775,7 +775,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   40179b:	83 c2 01             	add    $0x1,%edx
   40179e:	83 fa 09             	cmp    $0x9,%edx
   4017a1:	76 f0                	jbe    401793 <scramble+0x40b>
-  4017a3:	f3 c3                	repz retq 
+  4017a3:	f3 c3                	repz retq
   4017a5:	90                   	nop
   4017a6:	90                   	nop
   4017a7:	90                   	nop
@@ -786,14 +786,14 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4017af:	e8 8c 02 00 00       	callq  401a40 <Gets>
   4017b4:	b8 01 00 00 00       	mov    $0x1,%eax
   4017b9:	48 83 c4 28          	add    $0x28,%rsp
-  4017bd:	c3                   	retq   
+  4017bd:	c3                   	retq
   4017be:	90                   	nop
   4017bf:	90                   	nop
 
 00000000004017c0 <touch1>:
   4017c0:	48 83 ec 08          	sub    $0x8,%rsp
   4017c4:	c7 05 0e 2d 20 00 01 	movl   $0x1,0x202d0e(%rip)        # 6044dc <vlevel>
-  4017cb:	00 00 00 
+  4017cb:	00 00 00
   4017ce:	bf c5 30 40 00       	mov    $0x4030c5,%edi
   4017d3:	e8 e8 f4 ff ff       	callq  400cc0 <puts@plt>
   4017d8:	bf 01 00 00 00       	mov    $0x1,%edi
@@ -805,7 +805,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4017ec:	48 83 ec 08          	sub    $0x8,%rsp
   4017f0:	89 fa                	mov    %edi,%edx
   4017f2:	c7 05 e0 2c 20 00 02 	movl   $0x2,0x202ce0(%rip)        # 6044dc <vlevel>
-  4017f9:	00 00 00 
+  4017f9:	00 00 00
   4017fc:	3b 3d e2 2c 20 00    	cmp    0x202ce2(%rip),%edi        # 6044e4 <cookie>
   401802:	75 20                	jne    401824 <touch2+0x38>
   401804:	be e8 30 40 00       	mov    $0x4030e8,%esi
@@ -832,13 +832,13 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401854:	41 89 fc             	mov    %edi,%r12d
   401857:	48 89 f5             	mov    %rsi,%rbp
   40185a:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
-  401861:	00 00 
+  401861:	00 00
   401863:	48 89 44 24 78       	mov    %rax,0x78(%rsp)
   401868:	31 c0                	xor    %eax,%eax
   40186a:	e8 41 f5 ff ff       	callq  400db0 <random@plt>
   40186f:	48 89 c1             	mov    %rax,%rcx
   401872:	48 ba 0b d7 a3 70 3d 	movabs $0xa3d70a3d70a3d70b,%rdx
-  401879:	0a d7 a3 
+  401879:	0a d7 a3
   40187c:	48 f7 ea             	imul   %rdx
   40187f:	48 01 ca             	add    %rcx,%rdx
   401882:	48 c1 fa 06          	sar    $0x6,%rdx
@@ -866,20 +866,20 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4018d9:	0f b6 c0             	movzbl %al,%eax
   4018dc:	48 8b 74 24 78       	mov    0x78(%rsp),%rsi
   4018e1:	64 48 33 34 25 28 00 	xor    %fs:0x28,%rsi
-  4018e8:	00 00 
+  4018e8:	00 00
   4018ea:	74 05                	je     4018f1 <hexmatch+0xa5>
   4018ec:	e8 ef f3 ff ff       	callq  400ce0 <__stack_chk_fail@plt>
   4018f1:	48 83 ec 80          	sub    $0xffffffffffffff80,%rsp
   4018f5:	5b                   	pop    %rbx
   4018f6:	5d                   	pop    %rbp
   4018f7:	41 5c                	pop    %r12
-  4018f9:	c3                   	retq   
+  4018f9:	c3                   	retq
 
 00000000004018fa <touch3>:
   4018fa:	53                   	push   %rbx
   4018fb:	48 89 fb             	mov    %rdi,%rbx
   4018fe:	c7 05 d4 2b 20 00 03 	movl   $0x3,0x202bd4(%rip)        # 6044dc <vlevel>
-  401905:	00 00 00 
+  401905:	00 00 00
   401908:	48 89 fe             	mov    %rdi,%rsi
   40190b:	8b 3d d3 2b 20 00    	mov    0x202bd3(%rip),%edi        # 6044e4 <cookie>
   401911:	e8 36 ff ff ff       	callq  40184c <hexmatch>
@@ -913,7 +913,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401982:	b8 00 00 00 00       	mov    $0x0,%eax
   401987:	e8 64 f4 ff ff       	callq  400df0 <__printf_chk@plt>
   40198c:	48 83 c4 08          	add    $0x8,%rsp
-  401990:	c3                   	retq   
+  401990:	c3                   	retq
   401991:	90                   	nop
   401992:	90                   	nop
   401993:	90                   	nop
@@ -951,14 +951,14 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4019e6:	c6 82 00 45 60 00 20 	movb   $0x20,0x604500(%rdx)
   4019ed:	83 c0 01             	add    $0x1,%eax
   4019f0:	89 05 0e 37 20 00    	mov    %eax,0x20370e(%rip)        # 605104 <gets_cnt>
-  4019f6:	f3 c3                	repz retq 
+  4019f6:	f3 c3                	repz retq
 
 00000000004019f8 <save_term>:
   4019f8:	8b 05 06 37 20 00    	mov    0x203706(%rip),%eax        # 605104 <gets_cnt>
   4019fe:	8d 04 40             	lea    (%rax,%rax,2),%eax
-  401a01:	48 98                	cltq   
+  401a01:	48 98                	cltq
   401a03:	c6 80 00 45 60 00 00 	movb   $0x0,0x604500(%rax)
-  401a0a:	c3                   	retq   
+  401a0a:	c3                   	retq
 
 0000000000401a0b <check_fail>:
   401a0b:	48 83 ec 08          	sub    $0x8,%rsp
@@ -978,7 +978,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401a43:	53                   	push   %rbx
   401a44:	49 89 fc             	mov    %rdi,%r12
   401a47:	c7 05 b3 36 20 00 00 	movl   $0x0,0x2036b3(%rip)        # 605104 <gets_cnt>
-  401a4e:	00 00 00 
+  401a4e:	00 00 00
   401a51:	48 89 fb             	mov    %rdi,%rbx
   401a54:	eb 11                	jmp    401a67 <Gets+0x27>
   401a56:	48 8d 6b 01          	lea    0x1(%rbx),%rbp
@@ -999,15 +999,15 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401a8d:	5b                   	pop    %rbx
   401a8e:	5d                   	pop    %rbp
   401a8f:	41 5c                	pop    %r12
-  401a91:	c3                   	retq   
+  401a91:	c3                   	retq
 
 0000000000401a92 <notify_server>:
   401a92:	53                   	push   %rbx
   401a93:	48 81 ec 30 40 00 00 	sub    $0x4030,%rsp
   401a9a:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
-  401aa1:	00 00 
+  401aa1:	00 00
   401aa3:	48 89 84 24 28 40 00 	mov    %rax,0x4028(%rsp)
-  401aaa:	00 
+  401aaa:	00
   401aab:	31 c0                	xor    %eax,%eax
   401aad:	83 3d 34 2a 20 00 00 	cmpl   $0x0,0x202a34(%rip)        # 6044e8 <is_checker>
   401ab4:	0f 85 b2 01 00 00    	jne    401c6c <notify_server+0x1da>
@@ -1031,7 +1031,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401b0b:	41 b9 c1 31 40 00    	mov    $0x4031c1,%r9d
   401b11:	4c 0f 44 c9          	cmove  %rcx,%r9
   401b15:	48 c7 44 24 18 00 45 	movq   $0x604500,0x18(%rsp)
-  401b1c:	60 00 
+  401b1c:	60 00
   401b1e:	89 74 24 10          	mov    %esi,0x10(%rsp)
   401b22:	89 54 24 08          	mov    %edx,0x8(%rsp)
   401b26:	89 04 24             	mov    %eax,(%rsp)
@@ -1047,7 +1047,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401b5b:	85 db                	test   %ebx,%ebx
   401b5d:	74 70                	je     401bcf <notify_server+0x13d>
   401b5f:	4c 8d 8c 24 20 20 00 	lea    0x2020(%rsp),%r9
-  401b66:	00 
+  401b66:	00
   401b67:	41 b8 00 00 00 00    	mov    $0x0,%r8d
   401b6d:	48 8d 4c 24 20       	lea    0x20(%rsp),%rcx
   401b72:	48 8b 15 d7 25 20 00 	mov    0x2025d7(%rip),%rdx        # 604150 <lab>
@@ -1057,7 +1057,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401b8c:	85 c0                	test   %eax,%eax
   401b8e:	79 26                	jns    401bb6 <notify_server+0x124>
   401b90:	48 8d 94 24 20 20 00 	lea    0x2020(%rsp),%rdx
-  401b97:	00 
+  401b97:	00
   401b98:	be e7 31 40 00       	mov    $0x4031e7,%esi
   401b9d:	bf 01 00 00 00       	mov    $0x1,%edi
   401ba2:	b8 00 00 00 00       	mov    $0x0,%eax
@@ -1101,14 +1101,14 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401c62:	b8 00 00 00 00       	mov    $0x0,%eax
   401c67:	e8 84 f1 ff ff       	callq  400df0 <__printf_chk@plt>
   401c6c:	48 8b 84 24 28 40 00 	mov    0x4028(%rsp),%rax
-  401c73:	00 
+  401c73:	00
   401c74:	64 48 33 04 25 28 00 	xor    %fs:0x28,%rax
-  401c7b:	00 00 
+  401c7b:	00 00
   401c7d:	74 05                	je     401c84 <notify_server+0x1f2>
   401c7f:	e8 5c f0 ff ff       	callq  400ce0 <__stack_chk_fail@plt>
   401c84:	48 81 c4 30 40 00 00 	add    $0x4030,%rsp
   401c8b:	5b                   	pop    %rbx
-  401c8c:	c3                   	retq   
+  401c8c:	c3                   	retq
 
 0000000000401c8d <validate>:
   401c8d:	53                   	push   %rbx
@@ -1157,7 +1157,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401d43:	bf 01 00 00 00       	mov    $0x1,%edi
   401d48:	e8 45 fd ff ff       	callq  401a92 <notify_server>
   401d4d:	5b                   	pop    %rbx
-  401d4e:	c3                   	retq   
+  401d4e:	c3                   	retq
 
 0000000000401d4f <fail>:
   401d4f:	48 83 ec 08          	sub    $0x8,%rsp
@@ -1169,7 +1169,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401d68:	bf 00 00 00 00       	mov    $0x0,%edi
   401d6d:	e8 20 fd ff ff       	callq  401a92 <notify_server>
   401d72:	48 83 c4 08          	add    $0x8,%rsp
-  401d76:	c3                   	retq   
+  401d76:	c3                   	retq
 
 0000000000401d77 <bushandler>:
   401d77:	48 83 ec 08          	sub    $0x8,%rsp
@@ -1250,7 +1250,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401eb8:	48 83 ec 10          	sub    $0x10,%rsp
   401ebc:	48 89 fa             	mov    %rdi,%rdx
   401ebf:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
-  401ec6:	00 00 
+  401ec6:	00 00
   401ec8:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
   401ecc:	31 c0                	xor    %eax,%eax
   401ece:	48 8d 47 1e          	lea    0x1e(%rdi),%rax
@@ -1268,7 +1268,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401f06:	b8 00 00 00 00       	mov    $0x0,%eax
   401f0b:	e8 e0 ee ff ff       	callq  400df0 <__printf_chk@plt>
   401f10:	c7 05 c2 25 20 00 00 	movl   $0x0,0x2025c2(%rip)        # 6044dc <vlevel>
-  401f17:	00 00 00 
+  401f17:	00 00 00
   401f1a:	b8 00 00 00 00       	mov    $0x0,%eax
   401f1f:	e8 44 fa ff ff       	callq  401968 <test>
   401f24:	83 3d bd 25 20 00 00 	cmpl   $0x0,0x2025bd(%rip)        # 6044e8 <is_checker>
@@ -1281,11 +1281,11 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   401f46:	e8 75 ed ff ff       	callq  400cc0 <puts@plt>
   401f4b:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
   401f4f:	64 48 33 04 25 28 00 	xor    %fs:0x28,%rax
-  401f56:	00 00 
+  401f56:	00 00
   401f58:	74 05                	je     401f5f <launch+0xab>
   401f5a:	e8 81 ed ff ff       	callq  400ce0 <__stack_chk_fail@plt>
-  401f5f:	c9                   	leaveq 
-  401f60:	c3                   	retq   
+  401f5f:	c9                   	leaveq
+  401f60:	c3                   	retq
 
 0000000000401f61 <stable_launch>:
   401f61:	53                   	push   %rbx
@@ -1325,7 +1325,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402009:	48 89 df             	mov    %rbx,%rdi
   40200c:	e8 cf ed ff ff       	callq  400de0 <munmap@plt>
   402011:	5b                   	pop    %rbx
-  402012:	c3                   	retq   
+  402012:	c3                   	retq
   402013:	90                   	nop
   402014:	90                   	nop
   402015:	90                   	nop
@@ -1345,7 +1345,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402022:	c7 47 04 00 00 00 00 	movl   $0x0,0x4(%rdi)
   402029:	48 8d 47 10          	lea    0x10(%rdi),%rax
   40202d:	48 89 47 08          	mov    %rax,0x8(%rdi)
-  402031:	c3                   	retq   
+  402031:	c3                   	retq
 
 0000000000402032 <sigalrm_handler>:
   402032:	48 83 ec 08          	sub    $0x8,%rsp
@@ -1391,7 +1391,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4020b6:	5d                   	pop    %rbp
   4020b7:	41 5c                	pop    %r12
   4020b9:	41 5d                	pop    %r13
-  4020bb:	c3                   	retq   
+  4020bb:	c3                   	retq
 
 00000000004020bc <rio_read>:
   4020bc:	41 55                	push   %r13
@@ -1441,7 +1441,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402141:	5d                   	pop    %rbp
   402142:	41 5c                	pop    %r12
   402144:	41 5d                	pop    %r13
-  402146:	c3                   	retq   
+  402146:	c3                   	retq
 
 0000000000402147 <rio_readlineb>:
   402147:	41 55                	push   %r13
@@ -1488,7 +1488,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4021c3:	5d                   	pop    %rbp
   4021c4:	41 5c                	pop    %r12
   4021c6:	41 5d                	pop    %r13
-  4021c8:	c3                   	retq   
+  4021c8:	c3                   	retq
 
 00000000004021c9 <urlencode>:
   4021c9:	41 54                	push   %r12
@@ -1498,7 +1498,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4021d1:	48 89 fb             	mov    %rdi,%rbx
   4021d4:	48 89 f5             	mov    %rsi,%rbp
   4021d7:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
-  4021de:	00 00 
+  4021de:	00 00
   4021e0:	48 89 44 24 08       	mov    %rax,0x8(%rsp)
   4021e5:	31 c0                	xor    %eax,%eax
   4021e7:	48 c7 c1 ff ff ff ff 	mov    $0xffffffffffffffff,%rcx
@@ -1564,14 +1564,14 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4022b3:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
   4022b8:	48 8b 74 24 08       	mov    0x8(%rsp),%rsi
   4022bd:	64 48 33 34 25 28 00 	xor    %fs:0x28,%rsi
-  4022c4:	00 00 
+  4022c4:	00 00
   4022c6:	74 05                	je     4022cd <urlencode+0x104>
   4022c8:	e8 13 ea ff ff       	callq  400ce0 <__stack_chk_fail@plt>
   4022cd:	48 83 c4 10          	add    $0x10,%rsp
   4022d1:	5b                   	pop    %rbx
   4022d2:	5d                   	pop    %rbp
   4022d3:	41 5c                	pop    %r12
-  4022d5:	c3                   	retq   
+  4022d5:	c3                   	retq
 
 00000000004022d6 <submitr>:
   4022d6:	41 57                	push   %r15
@@ -1588,14 +1588,14 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4022f4:	4c 89 44 24 18       	mov    %r8,0x18(%rsp)
   4022f9:	4d 89 cd             	mov    %r9,%r13
   4022fc:	48 8b 9c 24 a0 a0 00 	mov    0xa0a0(%rsp),%rbx
-  402303:	00 
+  402303:	00
   402304:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
-  40230b:	00 00 
+  40230b:	00 00
   40230d:	48 89 84 24 58 a0 00 	mov    %rax,0xa058(%rsp)
-  402314:	00 
+  402314:	00
   402315:	31 c0                	xor    %eax,%eax
   402317:	c7 44 24 2c 00 00 00 	movl   $0x0,0x2c(%rsp)
-  40231e:	00 
+  40231e:	00
   40231f:	ba 00 00 00 00       	mov    $0x0,%edx
   402324:	be 01 00 00 00       	mov    $0x1,%esi
   402329:	bf 02 00 00 00       	mov    $0x2,%edi
@@ -1604,16 +1604,16 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402335:	85 c0                	test   %eax,%eax
   402337:	79 4e                	jns    402387 <submitr+0xb1>
   402339:	48 b8 45 72 72 6f 72 	movabs $0x43203a726f727245,%rax
-  402340:	3a 20 43 
+  402340:	3a 20 43
   402343:	48 89 03             	mov    %rax,(%rbx)
   402346:	48 b8 6c 69 65 6e 74 	movabs $0x6e7520746e65696c,%rax
-  40234d:	20 75 6e 
+  40234d:	20 75 6e
   402350:	48 89 43 08          	mov    %rax,0x8(%rbx)
   402354:	48 b8 61 62 6c 65 20 	movabs $0x206f7420656c6261,%rax
-  40235b:	74 6f 20 
+  40235b:	74 6f 20
   40235e:	48 89 43 10          	mov    %rax,0x10(%rbx)
   402362:	48 b8 63 72 65 61 74 	movabs $0x7320657461657263,%rax
-  402369:	65 20 73 
+  402369:	65 20 73
   40236c:	48 89 43 18          	mov    %rax,0x18(%rbx)
   402370:	c7 43 20 6f 63 6b 65 	movl   $0x656b636f,0x20(%rbx)
   402377:	66 c7 43 24 74 00    	movw   $0x74,0x24(%rbx)
@@ -1624,19 +1624,19 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   40238f:	48 85 c0             	test   %rax,%rax
   402392:	75 67                	jne    4023fb <submitr+0x125>
   402394:	48 b8 45 72 72 6f 72 	movabs $0x44203a726f727245,%rax
-  40239b:	3a 20 44 
+  40239b:	3a 20 44
   40239e:	48 89 03             	mov    %rax,(%rbx)
   4023a1:	48 b8 4e 53 20 69 73 	movabs $0x6e7520736920534e,%rax
-  4023a8:	20 75 6e 
+  4023a8:	20 75 6e
   4023ab:	48 89 43 08          	mov    %rax,0x8(%rbx)
   4023af:	48 b8 61 62 6c 65 20 	movabs $0x206f7420656c6261,%rax
-  4023b6:	74 6f 20 
+  4023b6:	74 6f 20
   4023b9:	48 89 43 10          	mov    %rax,0x10(%rbx)
   4023bd:	48 b8 72 65 73 6f 6c 	movabs $0x2065766c6f736572,%rax
-  4023c4:	76 65 20 
+  4023c4:	76 65 20
   4023c7:	48 89 43 18          	mov    %rax,0x18(%rbx)
   4023cb:	48 b8 73 65 72 76 65 	movabs $0x6120726576726573,%rax
-  4023d2:	72 20 61 
+  4023d2:	72 20 61
   4023d5:	48 89 43 20          	mov    %rax,0x20(%rbx)
   4023d9:	c7 43 28 64 64 72 65 	movl   $0x65726464,0x28(%rbx)
   4023e0:	66 c7 43 2c 73 73    	movw   $0x7373,0x2c(%rbx)
@@ -1646,9 +1646,9 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4023f1:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
   4023f6:	e9 d6 05 00 00       	jmpq   4029d1 <submitr+0x6fb>
   4023fb:	48 c7 44 24 30 00 00 	movq   $0x0,0x30(%rsp)
-  402402:	00 00 
+  402402:	00 00
   402404:	48 c7 44 24 38 00 00 	movq   $0x0,0x38(%rsp)
-  40240b:	00 00 
+  40240b:	00 00
   40240d:	66 c7 44 24 30 02 00 	movw   $0x2,0x30(%rsp)
   402414:	48 63 50 14          	movslq 0x14(%rax),%rdx
   402418:	48 8b 40 18          	mov    0x18(%rax),%rax
@@ -1666,16 +1666,16 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   40244d:	85 c0                	test   %eax,%eax
   40244f:	79 59                	jns    4024aa <submitr+0x1d4>
   402451:	48 b8 45 72 72 6f 72 	movabs $0x55203a726f727245,%rax
-  402458:	3a 20 55 
+  402458:	3a 20 55
   40245b:	48 89 03             	mov    %rax,(%rbx)
   40245e:	48 b8 6e 61 62 6c 65 	movabs $0x6f7420656c62616e,%rax
-  402465:	20 74 6f 
+  402465:	20 74 6f
   402468:	48 89 43 08          	mov    %rax,0x8(%rbx)
   40246c:	48 b8 20 63 6f 6e 6e 	movabs $0x7463656e6e6f6320,%rax
-  402473:	65 63 74 
+  402473:	65 63 74
   402476:	48 89 43 10          	mov    %rax,0x10(%rbx)
   40247a:	48 b8 20 74 6f 20 74 	movabs $0x20656874206f7420,%rax
-  402481:	68 65 20 
+  402481:	68 65 20
   402484:	48 89 43 18          	mov    %rax,0x18(%rbx)
   402488:	c7 43 20 73 65 72 76 	movl   $0x76726573,0x20(%rbx)
   40248f:	66 c7 43 24 65 72    	movw   $0x7265,0x24(%rbx)
@@ -1709,32 +1709,32 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4024f4:	48 3d 00 20 00 00    	cmp    $0x2000,%rax
   4024fa:	76 72                	jbe    40256e <submitr+0x298>
   4024fc:	48 b8 45 72 72 6f 72 	movabs $0x52203a726f727245,%rax
-  402503:	3a 20 52 
+  402503:	3a 20 52
   402506:	48 89 03             	mov    %rax,(%rbx)
   402509:	48 b8 65 73 75 6c 74 	movabs $0x747320746c757365,%rax
-  402510:	20 73 74 
+  402510:	20 73 74
   402513:	48 89 43 08          	mov    %rax,0x8(%rbx)
   402517:	48 b8 72 69 6e 67 20 	movabs $0x6f6f7420676e6972,%rax
-  40251e:	74 6f 6f 
+  40251e:	74 6f 6f
   402521:	48 89 43 10          	mov    %rax,0x10(%rbx)
   402525:	48 b8 20 6c 61 72 67 	movabs $0x202e656772616c20,%rax
-  40252c:	65 2e 20 
+  40252c:	65 2e 20
   40252f:	48 89 43 18          	mov    %rax,0x18(%rbx)
   402533:	48 b8 49 6e 63 72 65 	movabs $0x6573616572636e49,%rax
-  40253a:	61 73 65 
+  40253a:	61 73 65
   40253d:	48 89 43 20          	mov    %rax,0x20(%rbx)
   402541:	48 b8 20 53 55 42 4d 	movabs $0x5254494d42555320,%rax
-  402548:	49 54 52 
+  402548:	49 54 52
   40254b:	48 89 43 28          	mov    %rax,0x28(%rbx)
   40254f:	48 b8 5f 4d 41 58 42 	movabs $0x46554258414d5f,%rax
-  402556:	55 46 00 
+  402556:	55 46 00
   402559:	48 89 43 30          	mov    %rax,0x30(%rbx)
   40255d:	89 ef                	mov    %ebp,%edi
   40255f:	e8 bc e7 ff ff       	callq  400d20 <close@plt>
   402564:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
   402569:	e9 63 04 00 00       	jmpq   4029d1 <submitr+0x6fb>
   40256e:	48 8d b4 24 40 20 00 	lea    0x2040(%rsp),%rsi
-  402575:	00 
+  402575:	00
   402576:	b9 00 04 00 00       	mov    $0x400,%ecx
   40257b:	b8 00 00 00 00       	mov    $0x0,%eax
   402580:	48 89 f7             	mov    %rsi,%rdi
@@ -1744,28 +1744,28 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   40258e:	85 c0                	test   %eax,%eax
   402590:	0f 89 8a 00 00 00    	jns    402620 <submitr+0x34a>
   402596:	48 b8 45 72 72 6f 72 	movabs $0x52203a726f727245,%rax
-  40259d:	3a 20 52 
+  40259d:	3a 20 52
   4025a0:	48 89 03             	mov    %rax,(%rbx)
   4025a3:	48 b8 65 73 75 6c 74 	movabs $0x747320746c757365,%rax
-  4025aa:	20 73 74 
+  4025aa:	20 73 74
   4025ad:	48 89 43 08          	mov    %rax,0x8(%rbx)
   4025b1:	48 b8 72 69 6e 67 20 	movabs $0x6e6f6320676e6972,%rax
-  4025b8:	63 6f 6e 
+  4025b8:	63 6f 6e
   4025bb:	48 89 43 10          	mov    %rax,0x10(%rbx)
   4025bf:	48 b8 74 61 69 6e 73 	movabs $0x6e6120736e696174,%rax
-  4025c6:	20 61 6e 
+  4025c6:	20 61 6e
   4025c9:	48 89 43 18          	mov    %rax,0x18(%rbx)
   4025cd:	48 b8 20 69 6c 6c 65 	movabs $0x6c6167656c6c6920,%rax
-  4025d4:	67 61 6c 
+  4025d4:	67 61 6c
   4025d7:	48 89 43 20          	mov    %rax,0x20(%rbx)
   4025db:	48 b8 20 6f 72 20 75 	movabs $0x72706e7520726f20,%rax
-  4025e2:	6e 70 72 
+  4025e2:	6e 70 72
   4025e5:	48 89 43 28          	mov    %rax,0x28(%rbx)
   4025e9:	48 b8 69 6e 74 61 62 	movabs $0x20656c6261746e69,%rax
-  4025f0:	6c 65 20 
+  4025f0:	6c 65 20
   4025f3:	48 89 43 30          	mov    %rax,0x30(%rbx)
   4025f7:	48 b8 63 68 61 72 61 	movabs $0x6574636172616863,%rax
-  4025fe:	63 74 65 
+  4025fe:	63 74 65
   402601:	48 89 43 38          	mov    %rax,0x38(%rbx)
   402605:	66 c7 43 40 72 2e    	movw   $0x2e72,0x40(%rbx)
   40260b:	c6 43 42 00          	movb   $0x0,0x42(%rbx)
@@ -1775,7 +1775,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   40261b:	e9 b1 03 00 00       	jmpq   4029d1 <submitr+0x6fb>
   402620:	4c 89 64 24 08       	mov    %r12,0x8(%rsp)
   402625:	48 8d 84 24 40 20 00 	lea    0x2040(%rsp),%rax
-  40262c:	00 
+  40262c:	00
   40262d:	48 89 04 24          	mov    %rax,(%rsp)
   402631:	4d 89 f9             	mov    %r15,%r9
   402634:	4d 89 f0             	mov    %r14,%r8
@@ -1797,22 +1797,22 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   40267b:	48 85 c0             	test   %rax,%rax
   40267e:	79 6e                	jns    4026ee <submitr+0x418>
   402680:	48 b8 45 72 72 6f 72 	movabs $0x43203a726f727245,%rax
-  402687:	3a 20 43 
+  402687:	3a 20 43
   40268a:	48 89 03             	mov    %rax,(%rbx)
   40268d:	48 b8 6c 69 65 6e 74 	movabs $0x6e7520746e65696c,%rax
-  402694:	20 75 6e 
+  402694:	20 75 6e
   402697:	48 89 43 08          	mov    %rax,0x8(%rbx)
   40269b:	48 b8 61 62 6c 65 20 	movabs $0x206f7420656c6261,%rax
-  4026a2:	74 6f 20 
+  4026a2:	74 6f 20
   4026a5:	48 89 43 10          	mov    %rax,0x10(%rbx)
   4026a9:	48 b8 77 72 69 74 65 	movabs $0x6f74206574697277,%rax
-  4026b0:	20 74 6f 
+  4026b0:	20 74 6f
   4026b3:	48 89 43 18          	mov    %rax,0x18(%rbx)
   4026b7:	48 b8 20 74 68 65 20 	movabs $0x7365722065687420,%rax
-  4026be:	72 65 73 
+  4026be:	72 65 73
   4026c1:	48 89 43 20          	mov    %rax,0x20(%rbx)
   4026c5:	48 b8 75 6c 74 20 73 	movabs $0x7672657320746c75,%rax
-  4026cc:	65 72 76 
+  4026cc:	65 72 76
   4026cf:	48 89 43 28          	mov    %rax,0x28(%rbx)
   4026d3:	66 c7 43 30 65 72    	movw   $0x7265,0x30(%rbx)
   4026d9:	c6 43 32 00          	movb   $0x0,0x32(%rbx)
@@ -1822,35 +1822,35 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4026e9:	e9 e3 02 00 00       	jmpq   4029d1 <submitr+0x6fb>
   4026ee:	89 ee                	mov    %ebp,%esi
   4026f0:	48 8d bc 24 40 80 00 	lea    0x8040(%rsp),%rdi
-  4026f7:	00 
+  4026f7:	00
   4026f8:	e8 23 f9 ff ff       	callq  402020 <rio_readinitb>
   4026fd:	ba 00 20 00 00       	mov    $0x2000,%edx
   402702:	48 8d 74 24 40       	lea    0x40(%rsp),%rsi
   402707:	48 8d bc 24 40 80 00 	lea    0x8040(%rsp),%rdi
-  40270e:	00 
+  40270e:	00
   40270f:	e8 33 fa ff ff       	callq  402147 <rio_readlineb>
   402714:	48 85 c0             	test   %rax,%rax
   402717:	7f 7d                	jg     402796 <submitr+0x4c0>
   402719:	48 b8 45 72 72 6f 72 	movabs $0x43203a726f727245,%rax
-  402720:	3a 20 43 
+  402720:	3a 20 43
   402723:	48 89 03             	mov    %rax,(%rbx)
   402726:	48 b8 6c 69 65 6e 74 	movabs $0x6e7520746e65696c,%rax
-  40272d:	20 75 6e 
+  40272d:	20 75 6e
   402730:	48 89 43 08          	mov    %rax,0x8(%rbx)
   402734:	48 b8 61 62 6c 65 20 	movabs $0x206f7420656c6261,%rax
-  40273b:	74 6f 20 
+  40273b:	74 6f 20
   40273e:	48 89 43 10          	mov    %rax,0x10(%rbx)
   402742:	48 b8 72 65 61 64 20 	movabs $0x7269662064616572,%rax
-  402749:	66 69 72 
+  402749:	66 69 72
   40274c:	48 89 43 18          	mov    %rax,0x18(%rbx)
   402750:	48 b8 73 74 20 68 65 	movabs $0x6564616568207473,%rax
-  402757:	61 64 65 
+  402757:	61 64 65
   40275a:	48 89 43 20          	mov    %rax,0x20(%rbx)
   40275e:	48 b8 72 20 66 72 6f 	movabs $0x72206d6f72662072,%rax
-  402765:	6d 20 72 
+  402765:	6d 20 72
   402768:	48 89 43 28          	mov    %rax,0x28(%rbx)
   40276c:	48 b8 65 73 75 6c 74 	movabs $0x657320746c757365,%rax
-  402773:	20 73 65 
+  402773:	20 73 65
   402776:	48 89 43 30          	mov    %rax,0x30(%rbx)
   40277a:	c7 43 38 72 76 65 72 	movl   $0x72657672,0x38(%rbx)
   402781:	c6 43 3c 00          	movb   $0x0,0x3c(%rbx)
@@ -1859,10 +1859,10 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   40278c:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
   402791:	e9 3b 02 00 00       	jmpq   4029d1 <submitr+0x6fb>
   402796:	4c 8d 84 24 40 60 00 	lea    0x6040(%rsp),%r8
-  40279d:	00 
+  40279d:	00
   40279e:	48 8d 4c 24 2c       	lea    0x2c(%rsp),%rcx
   4027a3:	48 8d 94 24 40 40 00 	lea    0x4040(%rsp),%rdx
-  4027aa:	00 
+  4027aa:	00
   4027ab:	be 5f 35 40 00       	mov    $0x40355f,%esi
   4027b0:	48 8d 7c 24 40       	lea    0x40(%rsp),%rdi
   4027b5:	b8 00 00 00 00       	mov    $0x0,%eax
@@ -1871,30 +1871,30 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4027c4:	ba 00 20 00 00       	mov    $0x2000,%edx
   4027c9:	48 8d 74 24 40       	lea    0x40(%rsp),%rsi
   4027ce:	48 8d bc 24 40 80 00 	lea    0x8040(%rsp),%rdi
-  4027d5:	00 
+  4027d5:	00
   4027d6:	e8 6c f9 ff ff       	callq  402147 <rio_readlineb>
   4027db:	48 85 c0             	test   %rax,%rax
   4027de:	7f 79                	jg     402859 <submitr+0x583>
   4027e0:	48 b8 45 72 72 6f 72 	movabs $0x43203a726f727245,%rax
-  4027e7:	3a 20 43 
+  4027e7:	3a 20 43
   4027ea:	48 89 03             	mov    %rax,(%rbx)
   4027ed:	48 b8 6c 69 65 6e 74 	movabs $0x6e7520746e65696c,%rax
-  4027f4:	20 75 6e 
+  4027f4:	20 75 6e
   4027f7:	48 89 43 08          	mov    %rax,0x8(%rbx)
   4027fb:	48 b8 61 62 6c 65 20 	movabs $0x206f7420656c6261,%rax
-  402802:	74 6f 20 
+  402802:	74 6f 20
   402805:	48 89 43 10          	mov    %rax,0x10(%rbx)
   402809:	48 b8 72 65 61 64 20 	movabs $0x6165682064616572,%rax
-  402810:	68 65 61 
+  402810:	68 65 61
   402813:	48 89 43 18          	mov    %rax,0x18(%rbx)
   402817:	48 b8 64 65 72 73 20 	movabs $0x6f72662073726564,%rax
-  40281e:	66 72 6f 
+  40281e:	66 72 6f
   402821:	48 89 43 20          	mov    %rax,0x20(%rbx)
   402825:	48 b8 6d 20 74 68 65 	movabs $0x657220656874206d,%rax
-  40282c:	20 72 65 
+  40282c:	20 72 65
   40282f:	48 89 43 28          	mov    %rax,0x28(%rbx)
   402833:	48 b8 73 75 6c 74 20 	movabs $0x72657320746c7573,%rax
-  40283a:	73 65 72 
+  40283a:	73 65 72
   40283d:	48 89 43 30          	mov    %rax,0x30(%rbx)
   402841:	c7 43 38 76 65 72 00 	movl   $0x726576,0x38(%rbx)
   402848:	89 ef                	mov    %ebp,%edi
@@ -1913,30 +1913,30 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   40287a:	ba 00 20 00 00       	mov    $0x2000,%edx
   40287f:	48 8d 74 24 40       	lea    0x40(%rsp),%rsi
   402884:	48 8d bc 24 40 80 00 	lea    0x8040(%rsp),%rdi
-  40288b:	00 
+  40288b:	00
   40288c:	e8 b6 f8 ff ff       	callq  402147 <rio_readlineb>
   402891:	48 85 c0             	test   %rax,%rax
   402894:	0f 8f 83 00 00 00    	jg     40291d <submitr+0x647>
   40289a:	48 b8 45 72 72 6f 72 	movabs $0x43203a726f727245,%rax
-  4028a1:	3a 20 43 
+  4028a1:	3a 20 43
   4028a4:	48 89 03             	mov    %rax,(%rbx)
   4028a7:	48 b8 6c 69 65 6e 74 	movabs $0x6e7520746e65696c,%rax
-  4028ae:	20 75 6e 
+  4028ae:	20 75 6e
   4028b1:	48 89 43 08          	mov    %rax,0x8(%rbx)
   4028b5:	48 b8 61 62 6c 65 20 	movabs $0x206f7420656c6261,%rax
-  4028bc:	74 6f 20 
+  4028bc:	74 6f 20
   4028bf:	48 89 43 10          	mov    %rax,0x10(%rbx)
   4028c3:	48 b8 72 65 61 64 20 	movabs $0x6174732064616572,%rax
-  4028ca:	73 74 61 
+  4028ca:	73 74 61
   4028cd:	48 89 43 18          	mov    %rax,0x18(%rbx)
   4028d1:	48 b8 74 75 73 20 6d 	movabs $0x7373656d20737574,%rax
-  4028d8:	65 73 73 
+  4028d8:	65 73 73
   4028db:	48 89 43 20          	mov    %rax,0x20(%rbx)
   4028df:	48 b8 61 67 65 20 66 	movabs $0x6d6f726620656761,%rax
-  4028e6:	72 6f 6d 
+  4028e6:	72 6f 6d
   4028e9:	48 89 43 28          	mov    %rax,0x28(%rbx)
   4028ed:	48 b8 20 72 65 73 75 	movabs $0x20746c7573657220,%rax
-  4028f4:	6c 74 20 
+  4028f4:	6c 74 20
   4028f7:	48 89 43 30          	mov    %rax,0x30(%rbx)
   4028fb:	c7 43 38 73 65 72 76 	movl   $0x76726573,0x38(%rbx)
   402902:	66 c7 43 3c 65 72    	movw   $0x7265,0x3c(%rbx)
@@ -1949,7 +1949,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402922:	41 81 f8 c8 00 00 00 	cmp    $0xc8,%r8d
   402929:	74 34                	je     40295f <submitr+0x689>
   40292b:	4c 8d 8c 24 40 60 00 	lea    0x6040(%rsp),%r9
-  402932:	00 
+  402932:	00
   402933:	b9 28 35 40 00       	mov    $0x403528,%ecx
   402938:	48 c7 c2 ff ff ff ff 	mov    $0xffffffffffffffff,%rdx
   40293f:	be 01 00 00 00       	mov    $0x1,%esi
@@ -1998,9 +1998,9 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4029cd:	19 c0                	sbb    %eax,%eax
   4029cf:	f7 d0                	not    %eax
   4029d1:	48 8b 9c 24 58 a0 00 	mov    0xa058(%rsp),%rbx
-  4029d8:	00 
+  4029d8:	00
   4029d9:	64 48 33 1c 25 28 00 	xor    %fs:0x28,%rbx
-  4029e0:	00 00 
+  4029e0:	00 00
   4029e2:	74 05                	je     4029e9 <submitr+0x713>
   4029e4:	e8 f7 e2 ff ff       	callq  400ce0 <__stack_chk_fail@plt>
   4029e9:	48 81 c4 68 a0 00 00 	add    $0xa068,%rsp
@@ -2010,7 +2010,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   4029f4:	41 5d                	pop    %r13
   4029f6:	41 5e                	pop    %r14
   4029f8:	41 5f                	pop    %r15
-  4029fa:	c3                   	retq   
+  4029fa:	c3                   	retq
 
 00000000004029fb <init_timeout>:
   4029fb:	53                   	push   %rbx
@@ -2026,7 +2026,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402a1b:	89 df                	mov    %ebx,%edi
   402a1d:	e8 ee e2 ff ff       	callq  400d10 <alarm@plt>
   402a22:	5b                   	pop    %rbx
-  402a23:	c3                   	retq   
+  402a23:	c3                   	retq
 
 0000000000402a24 <init_driver>:
   402a24:	55                   	push   %rbp
@@ -2034,7 +2034,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402a26:	48 83 ec 28          	sub    $0x28,%rsp
   402a2a:	48 89 fd             	mov    %rdi,%rbp
   402a2d:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
-  402a34:	00 00 
+  402a34:	00 00
   402a36:	48 89 44 24 18       	mov    %rax,0x18(%rsp)
   402a3b:	31 c0                	xor    %eax,%eax
   402a3d:	be 01 00 00 00       	mov    $0x1,%esi
@@ -2054,16 +2054,16 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402a80:	85 c0                	test   %eax,%eax
   402a82:	79 4f                	jns    402ad3 <init_driver+0xaf>
   402a84:	48 b8 45 72 72 6f 72 	movabs $0x43203a726f727245,%rax
-  402a8b:	3a 20 43 
+  402a8b:	3a 20 43
   402a8e:	48 89 45 00          	mov    %rax,0x0(%rbp)
   402a92:	48 b8 6c 69 65 6e 74 	movabs $0x6e7520746e65696c,%rax
-  402a99:	20 75 6e 
+  402a99:	20 75 6e
   402a9c:	48 89 45 08          	mov    %rax,0x8(%rbp)
   402aa0:	48 b8 61 62 6c 65 20 	movabs $0x206f7420656c6261,%rax
-  402aa7:	74 6f 20 
+  402aa7:	74 6f 20
   402aaa:	48 89 45 10          	mov    %rax,0x10(%rbp)
   402aae:	48 b8 63 72 65 61 74 	movabs $0x7320657461657263,%rax
-  402ab5:	65 20 73 
+  402ab5:	65 20 73
   402ab8:	48 89 45 18          	mov    %rax,0x18(%rbp)
   402abc:	c7 45 20 6f 63 6b 65 	movl   $0x656b636f,0x20(%rbp)
   402ac3:	66 c7 45 24 74 00    	movw   $0x74,0x24(%rbp)
@@ -2074,19 +2074,19 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402add:	48 85 c0             	test   %rax,%rax
   402ae0:	75 68                	jne    402b4a <init_driver+0x126>
   402ae2:	48 b8 45 72 72 6f 72 	movabs $0x44203a726f727245,%rax
-  402ae9:	3a 20 44 
+  402ae9:	3a 20 44
   402aec:	48 89 45 00          	mov    %rax,0x0(%rbp)
   402af0:	48 b8 4e 53 20 69 73 	movabs $0x6e7520736920534e,%rax
-  402af7:	20 75 6e 
+  402af7:	20 75 6e
   402afa:	48 89 45 08          	mov    %rax,0x8(%rbp)
   402afe:	48 b8 61 62 6c 65 20 	movabs $0x206f7420656c6261,%rax
-  402b05:	74 6f 20 
+  402b05:	74 6f 20
   402b08:	48 89 45 10          	mov    %rax,0x10(%rbp)
   402b0c:	48 b8 72 65 73 6f 6c 	movabs $0x2065766c6f736572,%rax
-  402b13:	76 65 20 
+  402b13:	76 65 20
   402b16:	48 89 45 18          	mov    %rax,0x18(%rbp)
   402b1a:	48 b8 73 65 72 76 65 	movabs $0x6120726576726573,%rax
-  402b21:	72 20 61 
+  402b21:	72 20 61
   402b24:	48 89 45 20          	mov    %rax,0x20(%rbp)
   402b28:	c7 45 28 64 64 72 65 	movl   $0x65726464,0x28(%rbp)
   402b2f:	66 c7 45 2c 73 73    	movw   $0x7373,0x2c(%rbp)
@@ -2096,9 +2096,9 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402b40:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
   402b45:	e9 b1 00 00 00       	jmpq   402bfb <init_driver+0x1d7>
   402b4a:	48 c7 04 24 00 00 00 	movq   $0x0,(%rsp)
-  402b51:	00 
+  402b51:	00
   402b52:	48 c7 44 24 08 00 00 	movq   $0x0,0x8(%rsp)
-  402b59:	00 00 
+  402b59:	00 00
   402b5b:	66 c7 04 24 02 00    	movw   $0x2,(%rsp)
   402b61:	48 63 50 14          	movslq 0x14(%rax),%rdx
   402b65:	48 8b 40 18          	mov    0x18(%rax),%rax
@@ -2114,16 +2114,16 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402b91:	85 c0                	test   %eax,%eax
   402b93:	79 50                	jns    402be5 <init_driver+0x1c1>
   402b95:	48 b8 45 72 72 6f 72 	movabs $0x55203a726f727245,%rax
-  402b9c:	3a 20 55 
+  402b9c:	3a 20 55
   402b9f:	48 89 45 00          	mov    %rax,0x0(%rbp)
   402ba3:	48 b8 6e 61 62 6c 65 	movabs $0x6f7420656c62616e,%rax
-  402baa:	20 74 6f 
+  402baa:	20 74 6f
   402bad:	48 89 45 08          	mov    %rax,0x8(%rbp)
   402bb1:	48 b8 20 63 6f 6e 6e 	movabs $0x7463656e6e6f6320,%rax
-  402bb8:	65 63 74 
+  402bb8:	65 63 74
   402bbb:	48 89 45 10          	mov    %rax,0x10(%rbp)
   402bbf:	48 b8 20 74 6f 20 73 	movabs $0x76726573206f7420,%rax
-  402bc6:	65 72 76 
+  402bc6:	65 72 76
   402bc9:	48 89 45 18          	mov    %rax,0x18(%rbp)
   402bcd:	66 c7 45 20 65 72    	movw   $0x7265,0x20(%rbp)
   402bd3:	c6 45 22 00          	movb   $0x0,0x22(%rbp)
@@ -2138,13 +2138,13 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402bf6:	b8 00 00 00 00       	mov    $0x0,%eax
   402bfb:	48 8b 4c 24 18       	mov    0x18(%rsp),%rcx
   402c00:	64 48 33 0c 25 28 00 	xor    %fs:0x28,%rcx
-  402c07:	00 00 
+  402c07:	00 00
   402c09:	74 05                	je     402c10 <init_driver+0x1ec>
   402c0b:	e8 d0 e0 ff ff       	callq  400ce0 <__stack_chk_fail@plt>
   402c10:	48 83 c4 28          	add    $0x28,%rsp
   402c14:	5b                   	pop    %rbx
   402c15:	5d                   	pop    %rbp
-  402c16:	c3                   	retq   
+  402c16:	c3                   	retq
 
 0000000000402c17 <driver_post>:
   402c17:	53                   	push   %rbx
@@ -2179,7 +2179,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402c7f:	b8 00 00 00 00       	mov    $0x0,%eax
   402c84:	48 83 c4 10          	add    $0x10,%rsp
   402c88:	5b                   	pop    %rbx
-  402c89:	c3                   	retq   
+  402c89:	c3                   	retq
   402c8a:	90                   	nop
   402c8b:	90                   	nop
 
@@ -2199,9 +2199,9 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402cac:	83 f9 1f             	cmp    $0x1f,%ecx
   402caf:	7e f0                	jle    402ca1 <check+0x15>
   402cb1:	b8 01 00 00 00       	mov    $0x1,%eax
-  402cb6:	c3                   	retq   
+  402cb6:	c3                   	retq
   402cb7:	b8 00 00 00 00       	mov    $0x0,%eax
-  402cbc:	f3 c3                	repz retq 
+  402cbc:	f3 c3                	repz retq
 
 0000000000402cbe <gencookie>:
   402cbe:	53                   	push   %rbx
@@ -2215,7 +2215,7 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402cd7:	74 ee                	je     402cc7 <gencookie+0x9>
   402cd9:	89 d8                	mov    %ebx,%eax
   402cdb:	5b                   	pop    %rbx
-  402cdc:	c3                   	retq   
+  402cdc:	c3                   	retq
   402cdd:	90                   	nop
   402cde:	90                   	nop
   402cdf:	90                   	nop
@@ -2254,11 +2254,11 @@ extern long long int strtoll_l (const char *__restrict __nptr,
   402d5a:	4c 8b 74 24 28       	mov    0x28(%rsp),%r14
   402d5f:	4c 8b 7c 24 30       	mov    0x30(%rsp),%r15
   402d64:	48 83 c4 38          	add    $0x38,%rsp
-  402d68:	c3                   	retq   
+  402d68:	c3                   	retq
   402d69:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
 
 0000000000402d70 <__libc_csu_fini>:
-  402d70:	f3 c3                	repz retq 
+  402d70:	f3 c3                	repz retq
   402d72:	90                   	nop
   402d73:	90                   	nop
 
@@ -2267,4 +2267,4 @@ Disassembly of section .fini:
 0000000000402d74 <_fini>:
   402d74:	48 83 ec 08          	sub    $0x8,%rsp
   402d78:	48 83 c4 08          	add    $0x8,%rsp
-  402d7c:	c3                   	retq   
+  402d7c:	c3                   	retq
