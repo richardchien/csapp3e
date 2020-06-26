@@ -160,7 +160,51 @@ int main(int argc, char **argv) {
  * when we type ctrl-c (ctrl-z) at the keyboard.
  */
 void eval(char *cmdline) {
-    return;
+    char *argv[MAXARGS];
+    int bg = parseline(cmdline, argv);
+    if (argv[0] == NULL) {
+        return;
+    }
+
+    if (builtin_cmd(argv)) {
+        return;
+    }
+
+    sigset_t mask_chld, mask_all, prev_mask;
+    sigemptyset(&mask_chld);
+    sigaddset(&mask_chld, SIGCHLD);
+    sigfillset(&mask_all);
+
+    pid_t pid;
+    sigprocmask(SIG_BLOCK, &mask_chld, &prev_mask); // block SIGCHLD
+    if ((pid = fork()) == 0) {
+        // child
+        sigprocmask(SIG_SETMASK, &prev_mask, NULL); // unblock SIGCHLD
+        setpgid(0, 0); // create a new process group
+        if (execve(argv[0], argv, environ) < 0) {
+            printf("tsh: command not found: %s\n", argv[0]);
+            return;
+        }
+        // never reach here
+    } else if (pid < 0) {
+        unix_error("fork: fork error");
+    }
+
+    struct job_t *job;
+    sigprocmask(SIG_BLOCK, &mask_all, NULL); // block all signals
+    if (!addjob(jobs, pid, bg ? BG : FG, cmdline)) {
+        app_error("tsh: failed to create a new job");
+    }
+    job = getjobpid(jobs, pid);
+    sigprocmask(SIG_SETMASK, &prev_mask, NULL); // unblock
+
+    if (!bg) {
+        // foreground
+        waitfg(pid);
+    } else {
+        // background
+        printf("[%d] (%d) %s", job->jid, job->pid, job->cmdline);
+    }
 }
 
 /*
@@ -222,6 +266,20 @@ int parseline(const char *cmdline, char **argv) {
  *    it immediately.
  */
 int builtin_cmd(char **argv) {
+    if (0 == strcmp(argv[0], "quit")) {
+        exit(0);
+    }
+    if (0 == strcmp(argv[0], "&")) {
+        return 1;
+    }
+    if (0 == strcmp(argv[0], "jobs")) {
+        listjobs(jobs);
+        return 1;
+    }
+    if (0 == strcmp(argv[0], "fg") || 0 == strcmp(argv[0], "bg")) {
+        do_bgfg(argv);
+        return 1;
+    }
     return 0; /* not a builtin command */
 }
 
@@ -236,7 +294,22 @@ void do_bgfg(char **argv) {
  * waitfg - Block until process pid is no longer the foreground process
  */
 void waitfg(pid_t pid) {
-    return;
+    int status;
+    pid_t res;
+    struct job_t *job = getjobpid(jobs, pid);
+    while (1) {
+        if (job->pid == 0 || job->state != FG) {
+            break;
+        }
+    }
+}
+
+static void dump_status(int status) {
+    printf("WIFEXITED: %d\n", WIFEXITED(status));
+    printf("WIFSTOPPED: %d\n", WIFSTOPPED(status));
+    printf("WIFSIGNALED: %d\n", WIFSIGNALED(status));
+    printf("WTERMSIG: %d\n", WTERMSIG(status));
+    printf("WSTOPSIG: %d\n", WSTOPSIG(status));
 }
 
 /*****************
@@ -251,7 +324,31 @@ void waitfg(pid_t pid) {
  *     currently running children to terminate.
  */
 void sigchld_handler(int sig) {
-    return;
+    int olderrono = errno;
+
+    sigset_t mask_all, prev_mask;
+    sigfillset(&mask_all);
+
+    pid_t pid;
+    int status;
+    while ((pid = waitpid(-1, &status, WNOHANG | WUNTRACED)) > 0) {
+        // printf("pid: %d\n", pid);
+        // dump_status(status);
+        sigprocmask(SIG_BLOCK, &mask_all, &prev_mask);
+        struct job_t *job = getjobpid(jobs, pid);
+        if (WIFEXITED(status)) {
+            deletejob(jobs, pid);
+        } else if (WIFSIGNALED(status)) {
+            printf("Job [%d] (%d) terminated by signal %d\n", job->jid, job->pid, WTERMSIG(status));
+            deletejob(jobs, pid);
+        } else if (WIFSTOPPED(status)) {
+            printf("Job [%d] (%d) stopped by signal %d\n", job->jid, job->pid, sig);
+            job->state = ST;
+        }
+        sigprocmask(SIG_SETMASK, &prev_mask, NULL);
+    }
+
+    errno = olderrono;
 }
 
 /*
@@ -260,7 +357,18 @@ void sigchld_handler(int sig) {
  *    to the foreground job.
  */
 void sigint_handler(int sig) {
-    return;
+    int olderrono = errno;
+    sigset_t mask_all, prev_mask;
+    sigfillset(&mask_all);
+    sigprocmask(SIG_BLOCK, &mask_all, &prev_mask);
+    pid_t pid = fgpid(jobs);
+    sigprocmask(SIG_SETMASK, &prev_mask, NULL);
+    if (pid >= 1) {
+        if (kill(-pid, SIGINT) < 0) {
+            unix_error("sigint_handler: kill error");
+        }
+    }
+    errno = olderrono;
 }
 
 /*
@@ -269,7 +377,18 @@ void sigint_handler(int sig) {
  *     foreground job by sending it a SIGTSTP.
  */
 void sigtstp_handler(int sig) {
-    return;
+    int olderrono = errno;
+    sigset_t mask_all, prev_mask;
+    sigfillset(&mask_all);
+    sigprocmask(SIG_BLOCK, &mask_all, &prev_mask);
+    pid_t pid = fgpid(jobs);
+    sigprocmask(SIG_SETMASK, &prev_mask, NULL);
+    if (pid > 1) {
+        if (kill(-pid, SIGTSTP) < 0) {
+            unix_error("sigtstp_handler: kill error");
+        }
+    }
+    errno = olderrono;
 }
 
 /*********************
