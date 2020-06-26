@@ -182,8 +182,8 @@ void eval(char *cmdline) {
         sigprocmask(SIG_SETMASK, &prev_mask, NULL); // unblock SIGCHLD
         setpgid(0, 0); // create a new process group
         if (execve(argv[0], argv, environ) < 0) {
-            printf("tsh: command not found: %s\n", argv[0]);
-            return;
+            printf("%s: Command not found\n", argv[0]);
+            exit(1);
         }
         // never reach here
     } else if (pid < 0) {
@@ -287,20 +287,67 @@ int builtin_cmd(char **argv) {
  * do_bgfg - Execute the builtin bg and fg commands
  */
 void do_bgfg(char **argv) {
-    return;
+    if (argv[1] == NULL) {
+        printf("%s command requires PID or %%jobid argument\n", argv[0]);
+        return;
+    }
+
+    struct job_t *job;
+    const char *id = argv[1];
+    if (id[0] == '%') {
+        int jid = atoi(id + 1);
+        if (jid <= 0) {
+            printf("%s: argument must be a PID or %%jobid\n", argv[0]);
+            return;
+        }
+        job = getjobjid(jobs, jid);
+        if (!job) {
+            printf("%%%d: No such job\n", jid);
+            return;
+        }
+    } else {
+        pid_t pid = atoi(id);
+        if (pid <= 0) {
+            printf("%s: argument must be a PID or %%jobid\n", argv[0]);
+            return;
+        }
+        job = getjobpid(jobs, pid);
+        if (!job) {
+            printf("(%d): No such process\n", pid);
+            return;
+        }
+    }
+
+    if (0 == strcmp(argv[0], "bg")) {
+        if (job->state != ST) return;
+        if (kill(-job->pid, SIGCONT) < 0) {
+            unix_error("do_bgfg: kill error");
+        }
+        job->state = BG;
+        printf("[%d] (%d) %s", job->jid, job->pid, job->cmdline);
+    } else {
+        // fg
+        if (job->state != BG && job->state != ST) return;
+        if (job->state == ST) {
+            if (kill(-job->pid, SIGCONT) < 0) {
+                unix_error("do_bgfg: kill error");
+            }
+        }
+        job->state = FG;
+        waitfg(job->pid);
+    }
 }
 
 /*
  * waitfg - Block until process pid is no longer the foreground process
  */
 void waitfg(pid_t pid) {
-    int status;
-    pid_t res;
     struct job_t *job = getjobpid(jobs, pid);
     while (1) {
         if (job->pid == 0 || job->state != FG) {
             break;
         }
+        usleep(100);
     }
 }
 
@@ -308,6 +355,7 @@ static void dump_status(int status) {
     printf("WIFEXITED: %d\n", WIFEXITED(status));
     printf("WIFSTOPPED: %d\n", WIFSTOPPED(status));
     printf("WIFSIGNALED: %d\n", WIFSIGNALED(status));
+    printf("WIFCONTINUED: %d\n", WIFCONTINUED(status));
     printf("WTERMSIG: %d\n", WTERMSIG(status));
     printf("WSTOPSIG: %d\n", WSTOPSIG(status));
 }
@@ -342,7 +390,7 @@ void sigchld_handler(int sig) {
             printf("Job [%d] (%d) terminated by signal %d\n", job->jid, job->pid, WTERMSIG(status));
             deletejob(jobs, pid);
         } else if (WIFSTOPPED(status)) {
-            printf("Job [%d] (%d) stopped by signal %d\n", job->jid, job->pid, sig);
+            printf("Job [%d] (%d) stopped by signal %d\n", job->jid, job->pid, WSTOPSIG(status));
             job->state = ST;
         }
         sigprocmask(SIG_SETMASK, &prev_mask, NULL);
@@ -363,8 +411,8 @@ void sigint_handler(int sig) {
     sigprocmask(SIG_BLOCK, &mask_all, &prev_mask);
     pid_t pid = fgpid(jobs);
     sigprocmask(SIG_SETMASK, &prev_mask, NULL);
-    if (pid >= 1) {
-        if (kill(-pid, SIGINT) < 0) {
+    if (pid > 0) {
+        if (kill(-pid, sig) < 0) {
             unix_error("sigint_handler: kill error");
         }
     }
@@ -383,8 +431,8 @@ void sigtstp_handler(int sig) {
     sigprocmask(SIG_BLOCK, &mask_all, &prev_mask);
     pid_t pid = fgpid(jobs);
     sigprocmask(SIG_SETMASK, &prev_mask, NULL);
-    if (pid > 1) {
-        if (kill(-pid, SIGTSTP) < 0) {
+    if (pid > 0) {
+        if (kill(-pid, sig) < 0) {
             unix_error("sigtstp_handler: kill error");
         }
     }
