@@ -35,6 +35,8 @@ team_t team = {
     "",
 };
 
+#define DEBUG 0
+
 /* single word (4) or double word (8) alignment */
 #define ALIGNMENT 8
 
@@ -48,6 +50,7 @@ team_t team = {
 #define CHUNKSIZE (1 << 12)
 
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
+#define MIN(x, y) ((x) < (y) ? (x) : (y))
 
 #define PACK(size, alloc) ((size) | (alloc))
 
@@ -59,10 +62,9 @@ team_t team = {
 
 #define HDRP(bp) ((void *)(bp)-WSIZE)
 #define FTRP(bp) (HDRP(bp) + GET_SIZE(HDRP(bp)) - WSIZE)
-#define PREV_FTRP(bp) (HDRP(bp) - WSIZE)
 
 #define NEXT_BLKP(bp) ((void *)(bp) + GET_SIZE(HDRP(bp)))
-#define PREV_BLKP(bp) ((void *)(bp)-GET_SIZE(PREV_FTRP(bp)))
+#define PREV_BLKP(bp) ((void *)(bp)-GET_SIZE(HDRP(bp) - WSIZE))
 
 static void *heap_listp;
 
@@ -71,10 +73,23 @@ static void *find_fit(size_t blksize);
 static void place(void *bp, size_t blksize);
 static void *coalesce(void *bp);
 
+static void dump_block_list() {
+    for (void *bp = heap_listp; GET_SIZE(HDRP(bp)) != 0; bp = NEXT_BLKP(bp)) {
+        printf("mem[%p, %p), hdr(size = %d, alloc = %d), ftr(size = %d, alloc = %d)\n",
+               HDRP(bp),
+               FTRP(bp) + WSIZE,
+               GET_SIZE(HDRP(bp)),
+               GET_ALLOC(HDRP(bp)),
+               GET_SIZE(FTRP(bp)),
+               GET_ALLOC(FTRP(bp)));
+    }
+}
+
 /*
  * mm_init - initialize the malloc package.
  */
 int mm_init(void) {
+    if (DEBUG) printf("mm_init\n");
     if ((heap_listp = mem_sbrk(4 * WSIZE)) == (void *)-1) {
         return -1;
     }
@@ -82,17 +97,19 @@ int mm_init(void) {
     PUT(heap_listp + 1 * WSIZE, PACK(DSIZE, 1)); // 序言块头部
     PUT(heap_listp + 2 * WSIZE, PACK(DSIZE, 1)); // 序言块脚部
     PUT(heap_listp + 3 * WSIZE, PACK(0, 1)); // 结尾块头部
-    heap_listp += 2 * WSIZE; // 指向序言块头脚中间
+    heap_listp += 2 * WSIZE; // 指向序言块头脚部中间
 
     if (extend_heap(CHUNKSIZE / WSIZE) == NULL) {
         return -1;
     }
+    if (DEBUG) dump_block_list();
     return 0;
 }
 
 static void *extend_heap(size_t words) {
+    if (DEBUG) printf("extend_heap %d\n", words);
     void *bp;
-    size_t size = (words % 2 == 1) ? (words + 1) * WSIZE : words * WSIZE;
+    size_t size = (words % 2) ? (words + 1) * WSIZE : words * WSIZE;
     if ((bp = mem_sbrk(size)) == (void *)-1) {
         return NULL;
     }
@@ -110,6 +127,7 @@ static void *extend_heap(size_t words) {
  *     Always allocate a block whose size is a multiple of the alignment.
  */
 void *mm_malloc(size_t size) {
+    if (DEBUG) printf("mm_malloc %d\n", size);
     // int newsize = ALIGN(size + SIZE_T_SIZE);
     // void *p = mem_sbrk(newsize);
     // if (p == (void *)-1)
@@ -122,9 +140,11 @@ void *mm_malloc(size_t size) {
     if (size == 0) return NULL;
 
     size_t blksize = ALIGN(size) + DSIZE; // aligned size + size of header and footer
+    assert(blksize >= 2 * DSIZE); // minimum block size is 16B
     void *bp;
     if ((bp = find_fit(blksize)) != NULL) {
         place(bp, blksize);
+        if (DEBUG) dump_block_list();
         return bp;
     }
 
@@ -133,10 +153,12 @@ void *mm_malloc(size_t size) {
         return NULL;
     }
     place(bp, blksize);
+    if (DEBUG) dump_block_list();
     return bp;
 }
 
 static void *find_fit(size_t blksize) {
+    if (DEBUG) printf("find_fit %d\n", blksize);
     size_t currsize;
     for (void *bp = heap_listp; (currsize = GET_SIZE(HDRP(bp))) != 0; bp = NEXT_BLKP(bp)) {
         if (GET_ALLOC(HDRP(bp))) continue;
@@ -146,25 +168,35 @@ static void *find_fit(size_t blksize) {
 }
 
 static void place(void *bp, size_t blksize) {
+    if (DEBUG) printf("place %p %d\n", bp, blksize);
     size_t oldsize = GET_SIZE(HDRP(bp));
     size_t newsize = oldsize - blksize;
+    if (newsize < 2 * DSIZE) { // the remaining part is too small
+        blksize = oldsize; // alloc the whole free block
+        newsize = 0;
+    }
     PUT(HDRP(bp), PACK(blksize, 1));
     PUT(FTRP(bp), PACK(blksize, 1));
-    PUT(HDRP(NEXT_BLKP(bp)), PACK(newsize, 0));
-    PUT(FTRP(NEXT_BLKP(bp)), PACK(newsize, 0));
+    if (newsize > 0) {
+        PUT(HDRP(NEXT_BLKP(bp)), PACK(newsize, 0));
+        PUT(FTRP(NEXT_BLKP(bp)), PACK(newsize, 0));
+    }
 }
 
 /*
  * mm_free - Freeing a block does nothing.
  */
 void mm_free(void *bp) {
+    if (DEBUG) printf("mm_free %p\n", bp);
     size_t size = GET_SIZE(HDRP(bp));
     PUT(HDRP(bp), PACK(size, 0));
     PUT(FTRP(bp), PACK(size, 0));
     coalesce(bp);
+    if (DEBUG) dump_block_list();
 }
 
 static void *coalesce(void *bp) {
+    if (DEBUG) printf("coalesce %p\n", bp);
     size_t prev_alloc = GET_ALLOC(FTRP(PREV_BLKP(bp)));
     size_t next_alloc = GET_ALLOC(FTRP(NEXT_BLKP(bp)));
     size_t size = GET_SIZE(HDRP(bp));
@@ -190,16 +222,10 @@ static void *coalesce(void *bp) {
 /*
  * mm_realloc - Implemented simply in terms of mm_malloc and mm_free
  */
-void *mm_realloc(void *ptr, size_t size) {
-    void *oldptr = ptr;
-    void *newptr;
-    size_t copySize;
-
-    newptr = mm_malloc(size);
-    if (newptr == NULL) return NULL;
-    copySize = *(size_t *)((char *)oldptr - SIZE_T_SIZE);
-    if (size < copySize) copySize = size;
-    memcpy(newptr, oldptr, copySize);
-    mm_free(oldptr);
-    return newptr;
+void *mm_realloc(void *bp, size_t size) {
+    void *newbp = mm_malloc(size);
+    if (newbp == NULL) return NULL;
+    memcpy(newbp, bp, MIN(size, GET_SIZE(HDRP(bp)) - DSIZE));
+    mm_free(bp);
+    return newbp;
 }
